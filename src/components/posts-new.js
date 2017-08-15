@@ -33,7 +33,14 @@ class PostsNewComponent extends Component {
     }
 
     onSubmit(values){
-        this.props.createPost(values);
+        
+        
+        //this.props.history is available because this component is rendered inside a Route component from react-router
+       
+        this.props.createPost(values, () => {
+             this.props.history.push('/'); //this callback is handled by the action creator that we have prepared, after the POST has succeeded (it's a promise, @see actions/index.js)
+        });
+
     }
     
     render() {

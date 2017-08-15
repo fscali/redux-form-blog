@@ -18,8 +18,9 @@ export function fetchPosts() {
     };
 }
 
-export function createPost(values){
-     const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values);
+export function createPost(values, callback){
+     const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values)
+        .then(() => callback()); //callback is handled to the action creator by the component, and is necessary to navigate back to the index
     
     //By the time the action arrives to the reducer, because we use the middleware redux-promise, the payload will contain the actual response
     return {
