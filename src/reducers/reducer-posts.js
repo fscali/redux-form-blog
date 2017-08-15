@@ -1,4 +1,4 @@
-import { FETCH_POSTS } from '../actions';
+import { FETCH_POSTS, CREATE_POST} from '../actions';
 import _ from 'lodash';
 
 
@@ -11,6 +11,8 @@ export default function (state = {}, action) {
             //corresponding posts
             //see the documentation of lodash for the mapKeys function that does exactly what we need
             return  _.mapKeys(action.payload.data, 'id');
+      //  case CREATE_POST:
+
         default: 
              return state;
     }

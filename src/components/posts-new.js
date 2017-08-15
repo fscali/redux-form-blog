@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 //Field is a component, reduxForm is a function simple to the function  "connect" of react-redux
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
+
 
 class PostsNewComponent extends Component {
     //the field property contains some event handlers that we have to wire to our JSX
@@ -29,7 +33,7 @@ class PostsNewComponent extends Component {
     }
 
     onSubmit(values){
-        console.log(values);
+        this.props.createPost(values);
     }
     
     render() {
@@ -57,6 +61,7 @@ class PostsNewComponent extends Component {
                     component={this.renderField}
                     />
                 <button type="submit" className="btn btn-primary">Submit</button>
+               <Link className="btn btn-danger" to="/posts">Cancel</Link>
                  
             </form>
 
@@ -92,4 +97,6 @@ export default reduxForm({
     //validate: validate,
     validate, //will be called whenever the user tries to submit the form
     form: 'PostsNewForm' //name of the form
-})(PostsNewComponent);
+})(
+    connect(null,{ createPost })(PostsNewComponent) //this is how we stack out multiple connect-like helpers
+);
