@@ -1,4 +1,4 @@
-import { FETCH_POSTS, CREATE_POST} from '../actions';
+import { FETCH_POSTS, CREATE_POST, FETCH_POST, DELETE_POST} from '../actions';
 import _ from 'lodash';
 
 
@@ -12,8 +12,20 @@ export default function (state = {}, action) {
             //see the documentation of lodash for the mapKeys function that does exactly what we need
             return  _.mapKeys(action.payload.data, 'id');
       //  case CREATE_POST:
+      case FETCH_POST:
+            const post = action.payload.data;
+            //const newState = { ...state };
+            //newState[post.id] = post;
+            //return newState;
 
-        default: 
+            return { ...state, [action.payload.data.id]: action.payload.data }; //identical to the commented code above
+     case DELETE_POST:
+            
+            //this updates the local state even before fetching again the list of posts, so that we don't show the deleted post while 
+            //the list is updating from the server
+            return _.omit(state, action.payload)
+
+      default: 
              return state;
     }
 }

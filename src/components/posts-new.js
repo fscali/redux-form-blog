@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { createPost } from '../actions';
 
 
+
 class PostsNewComponent extends Component {
     //the field property contains some event handlers that we have to wire to our JSX
     renderField(field) {
